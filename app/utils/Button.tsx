@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import Loader from "./Loader";
 
 type ButtonProps = {
-	isLoading: boolean;
+	isLoading?: boolean;
 	children: React.ReactNode;
 	[key: string]: any;
 };

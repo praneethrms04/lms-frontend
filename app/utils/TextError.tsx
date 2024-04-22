@@ -8,10 +8,10 @@ const TextError = (props: any) => {
 	useEffect(() => {
 		if (error && "status" in error) {
 			const apiError = error as ApiError;
-			if (apiError.data.message === "jwt must be provided") {
+			if (apiError?.data?.message === "jwt must be provided") {
 				setErrorMessage("Something went wrong...Try again");
 			} else {
-				setErrorMessage(apiError.data.message);
+				setErrorMessage(apiError?.data?.message);
 			}
 		}
 	}, [error]);

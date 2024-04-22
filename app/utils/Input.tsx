@@ -25,7 +25,7 @@ const Input: FC<InputProps> = (props) => {
 
 
 	return (
-		<div>
+		<div >
 			<label
 				htmlFor={name}
 				className={`relative block rounded-md border ${

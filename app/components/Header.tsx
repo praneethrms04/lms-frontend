@@ -7,6 +7,8 @@ import { HiMenuAlt3, HiOutlineUserCircle } from "react-icons/hi";
 import { Login, SignUp, OtpVerification } from "./auth";
 import CustomModal from "../utils/CustomModal";
 import { useSelector } from "react-redux";
+import Image from "next/image";
+import { avatar } from "../assets";
 
 type Props = {
 	open: boolean;
@@ -14,14 +16,13 @@ type Props = {
 	activeItem: number;
 	route: string;
 	setRoute: (route: string) => void;
+	setActiveItem: (activeItem: number) => void;
 };
 
 const Header: FC<Props> = (props) => {
 	const { activeItem, route, setRoute, open, setOpen } = props;
 
 	const { user } = useSelector((state: any) => state.auth);
-	
-	console.log(user);
 
 	const [active, setActive] = useState(false);
 	const [openSidear, setOpenSidebar] = useState(false);
@@ -67,11 +68,28 @@ const Header: FC<Props> = (props) => {
 									setOpenSidebar(true);
 								}}
 							/>
-							<HiOutlineUserCircle
-								size={25}
-								className='sm:block hidden cursor-pointer'
-								onClick={() => setOpen(true)}
-							/>
+
+							{user ? (
+								<Link href={"/profile"}>
+									<Image
+										src={
+											user.avatar
+												? user.avatar?.url
+												: avatar
+										}
+										alt=''
+										width={40}
+										height={40}
+										className='w-8 h-8 rounded-full'
+									/>
+								</Link>
+							) : (
+								<HiOutlineUserCircle
+									size={25}
+									className='sm:block hidden cursor-pointer'
+									onClick={() => setOpen(true)}
+								/>
+							)}
 						</div>
 					</div>
 				</div>

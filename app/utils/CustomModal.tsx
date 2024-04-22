@@ -22,7 +22,7 @@ const CustomModal: FC<Props> = (props) => {
 			aria-describedby='modal-modal-description'
 		>
 			<Box className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-[450px] rounded-lg bg-white dark:bg-black text-black dark:text-white shadow outline-none '>
-				<Component open={setOpen} setRoute={setRoute} />
+				<Component open={open} setOpen={setOpen} setRoute={setRoute} />
 			</Box>
 		</Modal>
 	);

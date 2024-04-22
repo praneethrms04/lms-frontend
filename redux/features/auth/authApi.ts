@@ -26,7 +26,6 @@ export const authApi = apiSlice.injectEndpoints({
 					try {
 						const { queryFulfilled, dispatch } = patch;
 						const result = await queryFulfilled;
-						console.log(result);
 						dispatch(
 							userRegistration({
 								token: result.data.activationToken,
@@ -40,9 +39,37 @@ export const authApi = apiSlice.injectEndpoints({
 			}),
 
 			// user login
+			socialAuth: builder.mutation({
+				query: ({ email, name, avatar }) => ({
+					url: "login",
+					method: "POST",
+					body: {
+						email,
+						name,
+						avatar,
+					},
+					credentials: "include" as const,
+				}),
+				async onQueryStarted(arg, { ...patch }) {
+					try {
+						const { queryFulfilled, dispatch } = patch;
+						const result = await queryFulfilled;
+						dispatch(
+							userLoggedIn({
+								token: result.data.accessToken,
+								user: result.data.user,
+							})
+						);
+					} catch (error) {
+						console.log("error", error);
+					}
+				},
+			}),
+
+			// user login
 			userLogin: builder.mutation({
 				query: (data) => ({
-					url: "login",
+					url: "social-auth",
 					method: "POST",
 					body: data,
 					credentials: "include" as const,
@@ -62,7 +89,6 @@ export const authApi = apiSlice.injectEndpoints({
 					}
 				},
 			}),
-
 			// activate user
 			activateUser: builder.mutation({
 				query: (data) => ({
@@ -79,5 +105,6 @@ export const authApi = apiSlice.injectEndpoints({
 export const {
 	useRegisterMutation,
 	useUserLoginMutation,
+	useSocialAuthMutation,
 	useActivateUserMutation,
 } = authApi;

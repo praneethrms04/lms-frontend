@@ -2,11 +2,10 @@
 import React, { FC, useState } from "react";
 import Heading from "./utils/Heading";
 import Header from "./components/Header";
-import { useSelector } from "react-redux";
 
 interface Props {}
 
-const Home: FC<Props> = (props) => {
+const Home: FC<Props> = () => {
 	const [open, setOpen] = useState(false);
 	const [activeItem, setActiveItem] = useState(0);
 	const [route, setRoute] = useState("Login");
@@ -22,6 +21,7 @@ const Home: FC<Props> = (props) => {
 				open={open}
 				setOpen={setOpen}
 				activeItem={activeItem}
+				setActiveItem={setActiveItem}
 				route={route}
 				setRoute={setRoute}
 			/>

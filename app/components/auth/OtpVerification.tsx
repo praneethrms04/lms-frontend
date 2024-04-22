@@ -30,7 +30,7 @@ const OtpVerification: FC<OtpVerificationProps> = ({ setRoute }) => {
 
 	const [otp, setOtp] = useState<string[]>(new Array(4).fill(""));
 	const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0);
-	console.log(otp.join(""));
+	console.log(activeOTPIndex);
 	const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		console.log(e);
 		const target = e.target;
@@ -50,6 +50,12 @@ const OtpVerification: FC<OtpVerificationProps> = ({ setRoute }) => {
 	) => {
 		console.log(e.key);
 		currentOTPIndex = index;
+		if (e.key === "ArrowRight") {
+			setActiveOTPIndex(currentOTPIndex + 1);
+		}
+		if (e.key === "ArrowLeft") {
+			setActiveOTPIndex(currentOTPIndex - 1);
+		}
 		if (e.key === "Backspace") setActiveOTPIndex(currentOTPIndex - 1);
 	};
 
